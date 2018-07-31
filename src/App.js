@@ -6,7 +6,7 @@ import './App.css';
 import RomanNumeralComponent from './RomanNumeralComponent';
 
 class App extends Component {
-    displayName = 'App';
+   
 
     render() {
     return (

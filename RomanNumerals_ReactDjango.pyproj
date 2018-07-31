@@ -20,6 +20,8 @@
     <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="package.json" />
+    <Content Include=".babelrc" />
     <Content Include="public\favicon.ico" />
     <Content Include="public\index.html" />
     <Content Include="requirements.txt" />
@@ -33,6 +35,7 @@
     <Content Include="src\logo-react.svg" />
     <Content Include="src\registerServiceWorker.js" />
     <Content Include="src\RomanNumeralComponent.js" />
+    <Content Include="webpack.config.js" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="manage.py" />
@@ -42,10 +45,11 @@
     <Compile Include="reactdjango\__init__.py" />
     <Compile Include="sampleapp\admin.py" />
     <Compile Include="sampleapp\apps.py" />
-    <Compile Include="sampleapp\Helpers.py">
+    <Compile Include="sampleapp\helpers.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="sampleapp\migrations\0001_initial.py" />
+    <Compile Include="sampleapp\migrations\0002_auto_20180731_1415.py" />
     <Compile Include="sampleapp\migrations\__init__.py" />
     <Compile Include="sampleapp\models.py" />
     <Compile Include="sampleapp\serializers.py">
@@ -62,6 +66,7 @@
     <Folder Include="sampleapp" />
     <Folder Include="sampleapp\migrations" />
     <Folder Include="src" />
+    <Folder Include="src\bundles\" />
   </ItemGroup>
   <ItemGroup>
     <InterpreterReference Include="Global|ContinuumAnalytics|Anaconda36-64" />

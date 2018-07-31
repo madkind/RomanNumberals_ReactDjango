@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Axios from 'axios';
 
 
 class RomanNumeralComponent extends React.Component {
-    displayName = 'Roman Numerals'
     
     constructor(props) {
         super(props);
@@ -14,7 +12,7 @@ class RomanNumeralComponent extends React.Component {
         };
     }
 
-    timeout = null;
+    timeout: null;
 
     edit(e) {
         var targetVal = e.target.value;
@@ -28,20 +26,23 @@ class RomanNumeralComponent extends React.Component {
 
         clearTimeout(this.timeout);
 
-        this.timeout = setTimeout(function () {
-            console.log('Input Value:', targetVal);
-            let newState = this.state;
-            newState.result = this.query(targetVal);
-            this.setState(newState)
-        }.bind(this), 500);
+        if (res)
+            this.timeout = setTimeout(function () {
+                console.log('Input Value:', targetVal);
+                this.query(targetVal);
+            }.bind(this), 500);
     }
 
     query(romanNumber) {
         axios.post('http://127.0.0.1:8000/api/numberpaircreate/', {
             "romanNumber": romanNumber,
-            "arabicNumber": "0"
-        }, ).then(response => {
-                console.log(response)
+            "arabicNumber": 0
+        }).then(response => {
+            let newState = this.state;
+            newState.result = response.data.arabicNumber;
+            console.log(newState.result)
+            console.log(newState)
+            this.setState(newState)     
             })
     }
 

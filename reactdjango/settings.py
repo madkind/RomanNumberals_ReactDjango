@@ -31,13 +31,13 @@ ALLOWED_HOSTS = ['react-django.herokuapp.com', '127.0.0.1']
 
 INSTALLED_APPS = [
   'sampleapp',
-
+   'webpack_loader',
   'django.contrib.admin',
   'django.contrib.auth',
   'django.contrib.contenttypes',
   'django.contrib.sessions',
   'django.contrib.messages',
-  'django.contrib.staticfiles',
+  #'django.contrib.staticfiles',
   'rest_framework',
 ]
 
@@ -73,6 +73,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'reactdjango.wsgi.application'
 
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': '',
+        'STATS_FILE': os.path.join(BASE_DIR, os.path.join('src','webpack-stats.json')),
+    }
+}
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
@@ -127,6 +133,6 @@ STATICFILES_DIRS = [
   os.path.join(BASE_DIR, 'build/static'),
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
