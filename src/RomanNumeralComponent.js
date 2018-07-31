@@ -3,23 +3,30 @@ import React, { Component } from 'react';
 
 class RomanNumeralComponent extends React.Component {
     displayName = 'Roman Numerals'
-    inputControlClasses = ""
-
+    
     constructor(props) {
         super(props);
         this.state = { validClass: "" };
     }
 
+    timeout = null;
+
     edit(e) {
+        var targetVal = e.target.value;
 
         var patt = new RegExp("^[IVXLCDM]+$");
         var res = patt.test(e.target.value);
-       
+
+
         this.setState({
-            validClass: res || e.target.value.length == 0 ? "" : "is-invalid"
+            validClass: res || targetVal === 0 ? "" : "is-invalid"
         });
 
-        console.log(this.state)
+        clearTimeout(this.timeout);
+
+        this.timeout = setTimeout(function () {
+            console.log('Input Value:', targetVal);
+        }, 500);
     }
 
     render() {
