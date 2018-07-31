@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 
 class RomanNumeralComponent extends React.Component {
@@ -6,7 +7,10 @@ class RomanNumeralComponent extends React.Component {
     
     constructor(props) {
         super(props);
-        this.state = { validClass: "" };
+        this.state = {
+            validClass: "",
+            result: "",
+        };
     }
 
     timeout = null;
@@ -17,7 +21,6 @@ class RomanNumeralComponent extends React.Component {
         var patt = new RegExp("^[IVXLCDM]+$");
         var res = patt.test(e.target.value);
 
-
         this.setState({
             validClass: res || targetVal === 0 ? "" : "is-invalid"
         });
@@ -26,7 +29,17 @@ class RomanNumeralComponent extends React.Component {
 
         this.timeout = setTimeout(function () {
             console.log('Input Value:', targetVal);
-        }, 500);
+            let newState = this.state;
+            newState.result = targetVal;
+            this.setState(newState)
+        }.bind(this), 500);
+    }
+
+    query() {
+        axios.get('api/MultiInput/GetMultiInputData')
+            .then(response => {
+                console.log(response)
+            })
     }
 
     render() {
@@ -39,6 +52,13 @@ class RomanNumeralComponent extends React.Component {
             <small id="help" className="text-danger">
                     Please enter a valid roman number!
             </small>}
+            <input
+                id="tbResult"
+                type="text"
+                className={"form-control"}
+                readOnly="true"
+                value={this.state.result}
+            />
         </div >;
     }
 }
