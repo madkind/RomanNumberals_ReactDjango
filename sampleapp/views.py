@@ -11,13 +11,19 @@ class NumberPairCreate(generics.CreateAPIView):
     def post(self, request, format=None):
         serializer = NumberPairSerializer(data=request.data)
         
+        print("HELLO")
         if serializer.is_valid():
+            print("VALID")
             serializer.save(arabicNumber=romanToArabic(serializer.validated_data['romanNumber']))
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
+            print("INVALID")
+            print(serializer.data['romanNumber'])
             entry = NumberPair.objects.get(romanNumber=serializer.data['romanNumber'])
-            if not None:
+            print(toJSON(entry))
+            if entry is not None:
                 return Response(toJSON(entry), status=status.HTTP_304_NOT_MODIFIED)
+        print(serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class NumberPairList(generics.ListCreateAPIView):
