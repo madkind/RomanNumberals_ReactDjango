@@ -17,28 +17,31 @@ class RomanNumeralComponent extends React.Component {
     timeout: null;
 
     isRomanNumberValid(romanNumber) {
-        var patt = new RegExp("^[IVXLCDM]+$");
-        return patt.test(romanNumber);
+        return new RegExp("^[IVXLCDM]+$").test(romanNumber);
     }
 
     isOutOfBoundsRomanNumber(romanNumber) {
-        var patt = new RegExp("MM[IVXLCDM]");
-        return patt.test(romanNumber);
+        console.log("boundtest")
+        console.log(romanNumber)
+        console.log(new RegExp("MM[IVXLCDM]").test(romanNumber))
+        return new RegExp("MM[IVXLCDM]").test(romanNumber);
     }
     edit(e) {
         var targetVal = e.target.value;
 
         var valid = this.isRomanNumberValid(targetVal);
 
-        this.setState({
-            validRomanNumberCharacters: valid,
-            outOfBoundsRomanNumber: this.isOutOfBoundsRomanNumber(targetVal),
-            hasValue: targetVal.length>0
-        });
+        let newState = this.getStateCopy()
+        newState.validRomanNumberCharacters = valid;
+        newState.outOfBoundsRomanNumber = this.isOutOfBoundsRomanNumber(targetVal),
+        newState.hasValue = targetVal.length > 0
+
+        this.setState(newState);
+        console.log(this.state)
 
         clearTimeout(this.timeout);
 
-        if (this.state.validRomanNumberCharacters && !this.state.outOfBoundsRomanNumber && this.state.hasValue)
+        if (newState.validRomanNumberCharacters && !newState.outOfBoundsRomanNumber && newState.hasValue)
             this.timeout = setTimeout(function () {
                 this.query(targetVal);
             }.bind(this), 500);
@@ -49,12 +52,15 @@ class RomanNumeralComponent extends React.Component {
             "romanNumber": romanNumber,
             "arabicNumber": 0
         }).then(response => {
-            let newState = this.state;
+            let newState = this.getStateCopy();
             newState.result = response.data.arabicNumber;
             this.setState(newState)
         })
     }
 
+    getStateCopy() {
+        return JSON.parse(JSON.stringify(this.state));
+    }
     render() {
         return <div className="container">
             <div className="row">
@@ -85,6 +91,4 @@ class RomanNumeralComponent extends React.Component {
  </div>
     }
 }
-
-
 export default RomanNumeralComponent;
