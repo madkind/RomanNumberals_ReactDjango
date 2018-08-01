@@ -1,69 +1,88 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import './RomanNumeralComponent.css';
 
 class RomanNumeralComponent extends React.Component {
-    
+
     constructor(props) {
         super(props);
         this.state = {
-            validClass: "",
+            validRomanNumberCharacters: true,
+            outOfBoundsRomanNumber: false,
+            hasValue: false,
             result: "",
         };
     }
 
     timeout: null;
 
+    isRomanNumberValid(romanNumber) {
+        var patt = new RegExp("^[IVXLCDM]+$");
+        return patt.test(romanNumber);
+    }
+
+    isOutOfBoundsRomanNumber(romanNumber) {
+        var patt = new RegExp("MM[IVXLCDM]");
+        return patt.test(romanNumber);
+    }
     edit(e) {
         var targetVal = e.target.value;
 
-        var patt = new RegExp("^[IVXLCDM]+$");
-        var res = patt.test(e.target.value);
+        var valid = this.isRomanNumberValid(targetVal);
 
         this.setState({
-            validClass: res || targetVal === 0 ? "" : "is-invalid"
+            validRomanNumberCharacters: valid,
+            outOfBoundsRomanNumber: this.isOutOfBoundsRomanNumber(targetVal),
+            hasValue: targetVal.length>0
         });
 
         clearTimeout(this.timeout);
 
-        if (res)
+        if (this.state.validRomanNumberCharacters && !this.state.outOfBoundsRomanNumber && this.state.hasValue)
             this.timeout = setTimeout(function () {
-                console.log('Input Value:', targetVal);
                 this.query(targetVal);
             }.bind(this), 500);
     }
 
     query(romanNumber) {
-        axios.post('http://127.0.0.1:8000/api/numberpaircreate/', {
+        axios.post('/api/numberpaircreate/', {
             "romanNumber": romanNumber,
             "arabicNumber": 0
         }).then(response => {
             let newState = this.state;
             newState.result = response.data.arabicNumber;
-            console.log(newState.result)
-            console.log(newState)
-            this.setState(newState)     
-            })
+            this.setState(newState)
+        })
     }
 
     render() {
-        return <div>
-            <input type="text"
-                className={"form-control " + this.state.validClass}
-                onChange={(e) => this.edit(e)}
-            />
-            {this.state.validClass.length > 0 &&
-            <small id="help" className="text-danger">
-                    Please enter a valid roman number!
+        return <div className="container">
+            <div className="row">
+                <div className="col-4">   </div>
+                <div className="col-4">
+                    <input type="text"
+                        className={(!this.state.validRomanNumberCharacters || this.state.outOfBoundsRomanNumber) ? "is-invalid form-control" : "form-control"}
+                        onChange={(e) => this.edit(e)}
+                    />
+                    {!this.state.validRomanNumberCharacters &&
+                        <small id="help" className="text-danger">
+                            Please enter a valid roman number!
             </small>}
-            <input
-                id="tbResult"
-                type="text"
-                className={"form-control"}
-                readOnly="true"
-                value={this.state.result}
-            />
-        </div >;
+                    {this.state.outOfBoundsRomanNumber && this.state.validRomanNumberCharacters &&
+                        <small id="help" className="text-danger">
+                            Please enter a  roman number smaller or equal than MM (2000)!
+            </small>}
+                    <input
+                        id="tbResult"
+                        type="text"
+                        className={"form-control"}
+                        readOnly="true"
+                        value={this.state.result}
+                    />
+                </div>
+                <div className="col-4">   </div>
+            </div >
+ </div>
     }
 }
 
