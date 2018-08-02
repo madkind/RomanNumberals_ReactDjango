@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from django.http import JsonResponse
 from rest_framework import status
 from rest_framework import generics
-from sampleapp.Helpers import romanToArabic, toJSON
+from sampleapp.helpers import romanToArabic, toJSON
 from django.forms.models import model_to_dict
 
 
