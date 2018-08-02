@@ -36,6 +36,7 @@
     <Content Include="src\logo-react.svg" />
     <Content Include="src\registerServiceWorker.js" />
     <Content Include="src\RomanNumeralComponent.js" />
+    <Content Include="TestCases.txt" />
     <Content Include="webpack.config.js" />
   </ItemGroup>
   <ItemGroup>
@@ -44,28 +45,28 @@
     <Compile Include="reactdjango\urls.py" />
     <Compile Include="reactdjango\wsgi.py" />
     <Compile Include="reactdjango\__init__.py" />
-    <Compile Include="sampleapp\admin.py" />
-    <Compile Include="sampleapp\apps.py" />
-    <Compile Include="sampleapp\helpers.py">
+    <Compile Include="RN\admin.py" />
+    <Compile Include="RN\apps.py" />
+    <Compile Include="RN\helpers.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="sampleapp\migrations\0001_initial.py" />
-    <Compile Include="sampleapp\migrations\0002_auto_20180731_1415.py" />
-    <Compile Include="sampleapp\migrations\__init__.py" />
-    <Compile Include="sampleapp\models.py" />
-    <Compile Include="sampleapp\serializers.py">
+    <Compile Include="RN\migrations\0001_initial.py" />
+    <Compile Include="RN\migrations\0002_auto_20180731_1415.py" />
+    <Compile Include="RN\migrations\__init__.py" />
+    <Compile Include="RN\models.py" />
+    <Compile Include="RN\serializers.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="sampleapp\tests.py" />
-    <Compile Include="sampleapp\urls.py" />
-    <Compile Include="sampleapp\views.py" />
-    <Compile Include="sampleapp\__init__.py" />
+    <Compile Include="RN\tests.py" />
+    <Compile Include="RN\urls.py" />
+    <Compile Include="RN\views.py" />
+    <Compile Include="RN\__init__.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="public" />
     <Folder Include="reactdjango" />
-    <Folder Include="sampleapp" />
-    <Folder Include="sampleapp\migrations" />
+    <Folder Include="RN\" />
+    <Folder Include="RN\migrations\" />
     <Folder Include="src" />
     <Folder Include="src\bundles\" />
   </ItemGroup>

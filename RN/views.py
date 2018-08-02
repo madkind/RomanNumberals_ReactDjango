@@ -1,11 +1,11 @@
 from django.shortcuts import render
-from sampleapp.models import NumberPair
-from sampleapp.serializers import NumberPairSerializer
+from RN.models import NumberPair
+from RN.serializers import NumberPairSerializer
 from rest_framework.response import Response
 from django.http import JsonResponse
 from rest_framework import status
 from rest_framework import generics
-from sampleapp.helpers import romanToArabic, toJSON
+from RN.helpers import romanToArabic, toJSON
 from django.forms.models import model_to_dict
 
 

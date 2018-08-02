@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from sampleapp.models import NumberPair
+from RN.models import NumberPair
 class NumberPairSerializer(serializers.ModelSerializer):
     class Meta:
         model = NumberPair

@@ -1,0 +1,13 @@
+Roman Numerals test cases:
+
+Unit tests
+	The unit tests are located at RN/tests.py
+	Unit tests are written against roman numeral conversion logic and the django rest api 
+
+Manual tests
+	The react frontend is tested manually
+	Rule: a roman number is considered to be valid, if it only contains roman numeral characters (I, V, X, L, C, D, M)
+		1.) Navigate to main page - The page succesfully loads, the two textboxes are empty.
+		2.) Type in a valid roman number (between 1-2000) - the arabic representation of the number is shown in the 2nd textbox
+		3.) Delete the content of the first textbox - Alert message is shown : "Please enter a valid roman number!"
+		4.) Type in a roman number greater than 2000 (starts with "MM") - Alert message is shown: "Please enter a roman number smaller or equal than MM (2000)!"

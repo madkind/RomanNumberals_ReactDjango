@@ -30,7 +30,7 @@ ALLOWED_HOSTS = ['react-django.herokuapp.com', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
-  'sampleapp',
+  'RN',
    'webpack_loader',
   'django.contrib.admin',
   'django.contrib.auth',

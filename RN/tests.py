@@ -1,7 +1,7 @@
 from django.test import TestCase
 from rest_framework import status
-from sampleapp.helpers import romanToArabic
-from sampleapp.models import NumberPair
+from RN.helpers import romanToArabic
+from RN.models import NumberPair
 from roman import toRoman
 from rest_framework.test import APIRequestFactory
 
